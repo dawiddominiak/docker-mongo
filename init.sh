@@ -24,7 +24,7 @@ else
 	echo User and password of user set as default to admin:admin.
 fi
 
-mongod --smallfiles -v --logpath $log_path --logappend &
+mongod --smallfiles --logpath $log_path --logappend &
 mongo_pid=$!
 
 grep -q 'waiting for connections on port' $log_path
@@ -37,5 +37,17 @@ done
 echo "var mongo_user = '"$user"', mongo_password = '"$password"';" > settings.js
 cat ./user-creation.js >> ./settings.js
 mongo ./settings.js
+kill $mongo_pid
+
+mv $log_path $log_path".backup"
+mongod --auth --smallfiles --logpath $log_path --logappend &
+mongo_pid=$!
+grep -q 'waiting for connections on port' $log_path
+
+while [[ $? -ne 0 ]] ; do
+	sleep 2
+	echo "Waiting for mongo to initialize ..."
+	grep -q 'waiting for connections on port' $log_path
+done
 
 wait $mongo_pid
