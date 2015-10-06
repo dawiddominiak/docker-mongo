@@ -1,5 +1,5 @@
 conn = new Mongo();
-db = conn.getDB('admin');
+db = conn.getDB(database_name);
 
 db.dropUser(mongo_user);
 db.createUser(
