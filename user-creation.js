@@ -6,8 +6,15 @@ db.createUser(
 		user: mongo_user,
 		pwd: mongo_password,
 		roles: [
-			'userAdminAnyDatabase',
-			'readWriteAnyDatabase'
+			{
+				role: 'userAdminAnyDatabase',
+				db: 'admin'
+			},
+			{
+				role: 'readWriteAnyDatabase',
+				db: 'admin'
+			},
+			'readWrite'
 		]
 	}
 );
