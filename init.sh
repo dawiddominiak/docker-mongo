@@ -56,7 +56,7 @@ while [[ $? -ne 0 ]] ; do
 	grep -q 'waiting for connections on port' $log_path
 done
 
-echo "var mongo_user = '"$user"', mongo_password = '"$password"', database_name = '"$database_name"';" > settings.js
+echo "var mongo_user = '"$user"', mongo_password = '"$password"', mongo_admin_user = '"$mongo_admin_user"', mongo_admin_password = '"$mongo_admin_password"', database_name = '"$database_name"';" > settings.js
 cat ./user-creation.js >> ./settings.js
 mongo ./settings.js
 kill $mongo_pid
