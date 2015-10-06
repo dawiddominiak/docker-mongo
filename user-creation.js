@@ -1,5 +1,5 @@
 conn = new Mongo();
-db = conn.getDB(database_name);
+db = conn.getDB('admin');
 
 db.dropUser(mongo_user);
 db.createUser(
@@ -8,14 +8,10 @@ db.createUser(
 		pwd: mongo_password,
 		roles: [
 			{
-				role: 'userAdminAnyDatabase',
-				db: 'admin'
+				role: 'readWrite',
+				db: database_name
 			},
-			{
-				role: 'readWriteAnyDatabase',
-				db: 'admin'
-			},
-			'readWrite'
+			'root'
 		]
 	}
 );
