@@ -7,8 +7,8 @@ Then the scripts creates new user in database context
 and restart mongo with auth param included.
 
 ##### The following env variables should be set:
- * MONGO_USER
- * MONGO_PASSWORD
- * DATABASE_NAME
+ * MONGO_USER - database root user name.
+ * MONGO_PASSWORD - database root user password.
+ * DATABASE_NAME - name of database where created root user has "readWrite" access to.
 
 CMD #should not be overridden ([look at Dockerfile](Dockerfile)).
