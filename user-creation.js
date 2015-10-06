@@ -1,7 +1,6 @@
 conn = new Mongo();
-db = conn.getDB('admin');
+db = conn.getDB(database_name);
 
-db.dropUser('admin');
 db.createUser(
 	{
 		user: mongo_user,

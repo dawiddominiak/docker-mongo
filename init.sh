@@ -2,10 +2,18 @@
 
 log_path=/var/log/mongodb/mongo_database_log.log
 
+database_name="admin"
+
+if [ ! "$DATABASE_NAME" ]; then
+	database_name=$DATABASE_NAME
+else
+	echo "Using default database name "$database_name
+fi
+
 if [ "$LOG_PATH" ]; then
 	log_path=$LOG_PATH
 else
-	echo Log path not set. Setting default: $log_path .
+	echo "Log path not set. Setting default: "$log_path" ."
 fi
 
 dir_path=$(dirname $log_path)
@@ -38,7 +46,7 @@ while [[ $? -ne 0 ]] ; do
 	grep -q 'waiting for connections on port' $log_path
 done
 
-echo "var mongo_user = '"$user"', mongo_password = '"$password"';" > settings.js
+echo "var mongo_user = '"$user"', mongo_password = '"$password"', database_name = '"$database_name"';" > settings.js
 cat ./user-creation.js >> ./settings.js
 mongo ./settings.js
 kill $mongo_pid
