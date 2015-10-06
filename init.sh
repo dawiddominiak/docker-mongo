@@ -33,7 +33,17 @@ if [ "$MONGO_USER" ] && [ "$MONGO_PASSWORD" ]; then
 	user=$MONGO_USER
 	password=$MONGO_PASSWORD
 else
-	echo User and password of user set as default to admin:admin.
+	echo User and password of user set as default to $user:$password.
+fi
+
+mongo_admin_user=$user
+mongo_admin_password=$password
+
+if [ "$MONGO_ADMIN_USER" ] && [ "$MONGO_ADMIN_PASSWORD" ]; then
+	mongo_admin_user=$MONGO_ADMIN_USER
+	mongo_admin_password=$MONGO_ADMIN_PASSWORD
+else
+	echo User and password of admin set as default to $user:$password.
 fi
 
 mongod --smallfiles --logpath $log_path &
