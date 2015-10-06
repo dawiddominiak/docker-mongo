@@ -4,7 +4,7 @@ log_path=/var/log/mongodb/mongo_database_log.log
 
 database_name="admin"
 
-if [ ! "$DATABASE_NAME" ]; then
+if [ "$DATABASE_NAME" ]; then
 	database_name=$DATABASE_NAME
 else
 	echo "Using default database name "$database_name
